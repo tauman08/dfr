@@ -23,6 +23,11 @@ router.register('authors', AuthorModelViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+<<<<<<< HEAD
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
+=======
+    path('api/', include(router.urls)),
+
+>>>>>>> cd1f552f938f00c1158edc3dd776a9efe840aee6
 ]
