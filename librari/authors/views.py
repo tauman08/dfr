@@ -8,6 +8,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.generics import CreateAPIView, ListCreateAPIView
 from rest_framework.decorators import action
 from rest_framework.pagination import LimitOffsetPagination
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
 
 class AuthorPaginator(LimitOffsetPagination):
@@ -15,6 +16,7 @@ class AuthorPaginator(LimitOffsetPagination):
 
 
 class AuthorModelViewSet(ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Author.objects.all()
     serializer_class = AuthorModelSerializer
     # ручками через переопределение родительского метода:
@@ -36,6 +38,7 @@ class AuthorModelViewSet(ModelViewSet):
 
 
 class BookModelViewSet(ModelViewSet):
+    permission_classes = [AllowAny]
     queryset = Book.objects.all()
     serializer_class = BookModelSerializer
 
