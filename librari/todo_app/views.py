@@ -3,6 +3,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.pagination import LimitOffsetPagination
 from .serializers import ProjectModelSerializer, ToDoModelSerializer
 from .models import Project, ToDo
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
 
 class ProjectPaginator(LimitOffsetPagination):
