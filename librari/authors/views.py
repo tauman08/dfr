@@ -16,7 +16,8 @@ class AuthorPaginator(LimitOffsetPagination):
 
 
 class AuthorModelViewSet(ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
+
     queryset = Author.objects.all()
     serializer_class = AuthorModelSerializer
     # ручками через переопределение родительского метода:
@@ -33,12 +34,13 @@ class AuthorModelViewSet(ModelViewSet):
     #     return super().get_queryset()
     # /////////////////////////////////////////////////////////////////
     # через django_filters:
-    filterset_fields = ['first_name', 'last_name', 'birthday_year']
-    pagination_class = AuthorPaginator
+
+    # filterset_fields = ['first_name', 'last_name', 'birthday_year']
+    # pagination_class = AuthorPaginator
 
 
 class BookModelViewSet(ModelViewSet):
-    permission_classes = [AllowAny]
+
     queryset = Book.objects.all()
     serializer_class = BookModelSerializer
 
