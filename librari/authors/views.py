@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet, ViewSet
 from .models import Author, Book, Article, Biography
-from .serializers import AuthorModelSerializer, BookModelSerializer, ArticleModelSerializer, BiographyModelSerializer
+from .serializers import AuthorModelSerializer, AuthorModelSerializer_2, BookModelSerializer, ArticleModelSerializer, BiographyModelSerializer
 # from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer
@@ -85,21 +85,34 @@ class BiographyModelViewSet(ModelViewSet):
 #     queryset = Author.objects.all()
 #     serializer_class = AuthorModelSerializer
 
-class MyAPIView(ViewSet):
+# class MyAPIView(ViewSet):
 
-    # create - post,
-    # retrieve - получение одного объекта
-    # update - update,
-    # destroy - delete,
-    # list- get(получение всех объектов)
-    # абревиатура - CRUD (create,retrieve,update, destroy)
-    # принятые в django обозначения методов mixins.py
-    def list(self, request):
-        queryset = Author.objects.all()
-        serializer = AuthorModelSerializer(queryset, many=True)
-        return Response(serializer.data)
+#     # create - post,
+#     # retrieve - получение одного объекта
+#     # update - update,
+#     # destroy - delete,
+#     # list- get(получение всех объектов)
+#     # абревиатура - CRUD (create,retrieve,update, destroy)
+#     # принятые в django обозначения методов mixins.py
+#     def list(self, request):
+#         queryset = Author.objects.all()
+#         serializer = AuthorModelSerializer(queryset, many=True)
+#         return Response(serializer.data)
+#     def
+#     # реализуем свой произвольный метод. url создается автоматом - /my/babayka
 
-    # реализуем свой произвольный метод. url создается автоматом - /my/babayka
-    @action(detail=False, methods=['get'])
-    def babayka(self, request):
-        return Response({'data': 'RATATA'})
+#     @action(detail=False, methods=['get'])
+#     def babayka(self, request):
+#         return Response({'data': 'RATATA'})
+
+# Версионирование
+
+
+class MyAPIView(ModelViewSet):
+    queryset = Author.objects.all()
+    serializer = AuthorModelSerializer(queryset, many=True)
+
+    def get_serializer_class(self):
+        if self.request.version == '1':
+            return AuthorModelSerializer
+        return AuthorModelSerializer_2
