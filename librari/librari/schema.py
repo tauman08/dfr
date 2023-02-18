@@ -55,7 +55,7 @@ class AuthorMutation(graphene.Mutation):
         author = Author.objects.get(pk=id)
         author.first_name = first_name
         author.last_name = last_name
-        author.birthday_year =
+        author.birthday_year = birthday_year
         birthday_year
         author.save()
         return AuthorMutation(author=author)
